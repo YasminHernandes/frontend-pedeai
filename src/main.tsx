@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { SignUpRestaurant } from './pages/index.ts'
-import App from './App.tsx'
+import { App } from './App.tsx'
 
 const router = createBrowserRouter([
   {
