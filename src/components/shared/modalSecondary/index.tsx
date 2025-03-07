@@ -56,7 +56,7 @@ export const ModalSecondary = () => {
     >
       <Form>
         <FieldContainer>
-          <Field type="text" placeholder="Nome" />
+          <Field type="text" placeholder="Nome" autoFocus/>
           {/* <Message> Campo Obrigatório! </Message> */}
         </FieldContainer>
         <FieldContainer>

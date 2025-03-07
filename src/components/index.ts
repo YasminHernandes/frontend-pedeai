@@ -1,4 +1,4 @@
-export { Button, BaseCard } from '@/components/shared';
+export { Button, BaseCard, Logo, Modal, ModalSecondary } from '@/components/shared';
 export { TabBarAdmin } from '@/components/admin/tabBarAdmin';
 export { AdminCardPrimary } from '@/components/admin/adminCardPrimary';
 export { AdminCardSecondary } from '@/components/admin/adminCardSecondary'

@@ -3,22 +3,19 @@ import { Button } from "@/components";
 import { colors } from "@/_variables";
 import IconSuccess from '@/assets/svg/icon-success.svg'
 import IconError from '@/assets/svg/icon-error.svg'
+import { Logo } from "@/components/shared";
 
 const Wrapper = styled.div`
   width: 100%;
   max-width: 390px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 0 auto;
   gap: 24px;
-`;
-const Logo = styled.h1`
-  font-family: Agbalumo;
-  font-weight: 400;
-  font-size: 56px;
-  color: ${colors.thunderbird};
+  margin: 0 auto;
+  padding: 0 8px;
 `;
 const Title = styled.p`
   font-size: 24px;
@@ -45,10 +42,11 @@ const Field = styled.input`
   justify-content: space-between;
   align-items: center;
   padding: 16px 18px;
-  border: 1px solid ${colors.masala};
+  border: 1px solid ${colors.mountainMist};
   border-radius: 8px;
   margin-bottom: 16px;
   background-color: transparent;
+  transition: all .2s ease-in;
 
   &:nth-child(5) {
     margin-bottom: 24px;
@@ -87,12 +85,12 @@ const CheckboxSpan = styled.span`
 export const SignUpRestaurant = () => {
   return (
     <Wrapper>
-      <Logo>PedeAí</Logo>
+      <Logo/>
       <Title>Cadastrar</Title>
 
       <Form>
         <FieldContainer>
-          <Field type="text" placeholder="Username" />
+          <Field type="text" placeholder="Username" autoFocus />
           {/* <img src={IconSuccess} alt="" />
           <img src={IconError} alt="" /> */}
         </FieldContainer>

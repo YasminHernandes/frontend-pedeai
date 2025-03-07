@@ -5,10 +5,6 @@
   font-family: Inter, sans-serif;
 }
 
-body {
-  background: #f5f5f5;
-}
-
 button {
   border: none;
   background: transparent;
@@ -26,4 +22,8 @@ a {
 
 li {
   list-style: none;
+}
+
+input {
+  outline: none;
 }

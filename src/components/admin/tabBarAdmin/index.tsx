@@ -2,7 +2,17 @@ import styled from 'styled-components';
 import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } from '@/components/shared/svgComponents';
 import { colors } from '@/_variables';
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+    width: 100%;
+    max-width: 390px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    margin: 0 auto;
+    background: ${colors.white};
+`
 const List = styled.ul`
     display: flex;
     justify-content: space-between;
