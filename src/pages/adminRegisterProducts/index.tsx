@@ -9,7 +9,6 @@ import IconBack from "@/assets/svg/icon-back.svg";
 const Wrapper = styled.div`
   width: 100%;
   max-width: 390px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -19,14 +18,20 @@ const Wrapper = styled.div`
 const Header = styled.header`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: ${colors.white};
   gap: 16px;
   padding: 16px 0;
-  `;
+  z-index: 99;
+`;
 const Back = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
 const Title = styled.p`
   font-weight: 500;
   font-size: 14px;
@@ -47,15 +52,18 @@ const FieldContainer = styled.div`
     transform: translateY(-50%);
   }
   span {
+    left: 20px;
+    right: 0;
     color: ${colors.mountainMist};
   }
 `;
 const Field = styled.input`
   width: 100%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 18px;
+  padding: 8px 18px;
   border: 1px solid ${colors.mountainMist};
   border-radius: 8px;
   margin-bottom: 16px;
@@ -73,6 +81,10 @@ const Field = styled.input`
     outline: none;
     border: 1px solid ${colors.thunderbird};
   }
+
+  &:nth-child(2) {
+    padding: 8px 18px 8px 44px;
+  }
 `;
 const Textarea = styled.textarea`
   width: 100%;
@@ -87,25 +99,6 @@ const Textarea = styled.textarea`
     outline: none;
     border: 1px solid ${colors.thunderbird};
   }
-`;
-const ContainerSuccess = styled.div`
-  width: 100%;
-  flex-basis: 100%;
-  align-content: center;
-`;
-const TitleSuccess = styled.p`
-  font-weight: 600;
-  font-size: 16px;
-  color: ${colors.mineShaft};
-  text-align: center;
-  margin-bottom: 12px;
-`;
-const Description = styled.p`
-  font-weight: 300;
-  font-size: 13px;
-  color: ${colors.boulder};
-  text-align: center;
-  margin-bottom: 24px;
 `;
 
 export const AdminRegisterProducts = () => {
@@ -131,8 +124,8 @@ export const AdminRegisterProducts = () => {
           {/* <img src={IconError} alt="" /> */}
         </FieldContainer>
         <FieldContainer>
-          <Field type="number" placeholder="Valor*" />
           <span>R$</span>
+          <Field type="number" placeholder="Valor*" />
         </FieldContainer>
         <Textarea placeholder="Descrição" />
         <Field type="string" placeholder="Url da Imagem" />
@@ -141,17 +134,6 @@ export const AdminRegisterProducts = () => {
           Cadastrar novo produto
         </Button>
       </Form>
-
-        {/* <ContainerSuccess>
-        <TitleSuccess>Produto cadastrado com sucesso!</TitleSuccess>
-        <Description>
-          Você cadastrou um novo produto! Gerencie seus produtos em{" "}
-          <strong>Produtos</strong>
-        </Description>
-        <Button isFill radius="50px" padding="12px">
-          Entendi!
-        </Button>
-      </ContainerSuccess> */}
 
       <TabBarAdmin />
     </Wrapper>

@@ -93,7 +93,7 @@ export const AdminOrders = () => {
       <Content>
         <div>
           <Container>
-            <Title>Seus Pedidos</Title>
+            <Title>Pedidos</Title>
             <VerTodos>ver todos</VerTodos>
           </Container>
 

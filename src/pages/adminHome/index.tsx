@@ -10,6 +10,14 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding: 0 8px;
 `;
+const LogoContainer = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: ${colors.white};
+  z-index: 99;
+`;
 const AdminInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,7 +74,9 @@ const OrdersContainer = styled.div``;
 export const AdminHome = () => {
   return (
     <Wrapper>
-      <Logo />
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
 
       <AdminInfo>
         <Username>oreidoparmigina</Username>

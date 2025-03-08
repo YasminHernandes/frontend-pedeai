@@ -5,7 +5,6 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   width: 100%;
   max-width: 390px;
-  height: 100vh;
   margin: 0 auto;
   padding: 0 8px;
 `;
@@ -16,6 +15,7 @@ const Header = styled.header`
   right: 0;
   background: ${colors.white};
   padding-bottom: 8px;
+  z-index: 99;
 `;
 const NovoProduto = styled.div`
     width: 136px;
