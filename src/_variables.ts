@@ -7,9 +7,10 @@ export const colors = {
   alto: "rgba(214 214 214 / 1)",
   stormDust: "rgba(101 101 101 / 1)",
   yellowSea: "rgba(255 172 40 / 1)",
+  RobRoy: "rgba(239 196 110 / 1)",
+  mantis: "rgba(124 195 98 / 1)",
   mountainMist: "rgba(148 148 148 / 1)",
   boulder: "rgba(122 122 122 / 1)",
-  platinum: "rgba(217 217 217 / 1)",
   black50: "rgba(0 0 0 / .5)",
   alabaster: "rgba(239 239 239 / 1)",
 };

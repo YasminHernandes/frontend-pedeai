@@ -18,7 +18,7 @@ const Wrapper = styled.div<{ $primary?: boolean }>`
   border: ${(props) =>
     props.$primary ? `1px solid ${colors.thunderbird}` : "none"};
   border-radius: ${(props) => (props.$primary ? "50px" : "0")};
-  padding: ${(props) => (props.$primary ? "4px 12px" : "4px 0")};
+  padding: ${(props) => (props.$primary ? "2px 12px" : "4px 0")};
 `;
 const Icon = styled.div<{ $primary?: boolean }>`
   width: ${(props) => (props.$primary ? "max-content" : "22px")};
@@ -27,7 +27,7 @@ const Icon = styled.div<{ $primary?: boolean }>`
   align-items: center;
   justify-content: center;
   background: ${(props) =>
-    props.$primary ? "transparent" : `${colors.platinum}`};
+    props.$primary ? "transparent" : `${colors.alto}`};
   border-radius: ${(props) => (props.$primary ? "none" : "50px")};
   cursor: pointer;
 `;

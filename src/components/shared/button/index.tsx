@@ -1,6 +1,8 @@
 import { ReactNode } from "react"
 import styled from "styled-components"
 import { colors } from "@/_variables"
+import IconCart from "@/assets/svg/icon-cart.svg"
+
 
 interface IButton {
     children: ReactNode,
@@ -32,7 +34,7 @@ export const Button = ({ children, isFill, hasIcon, radius, padding }: IButton) 
 
     return (
         <Wrapper $fill={isFill} $radius={radius} $padding={padding}>
-            { hasIcon && <img src="/src/assets/svg/icon-cart.svg" alt="Icon" /> }
+            { hasIcon && <img src={IconCart} alt="Icon" /> }
             { children }
         </Wrapper>
     )

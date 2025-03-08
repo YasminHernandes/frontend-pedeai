@@ -1,10 +1,14 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AdminOrders, AdminRegisterProducts, SearchRestaurant, SignUpRestaurant, LoginRestaurant, AdminHome, AdminProducts} from './pages/index.ts'
+import { AdminOrders, AdminRegisterProducts, SearchRestaurant, SignUpRestaurant, LoginRestaurant, AdminHome, AdminProducts, NotFound, UserHome, ProductDetails, UserOrders, Checkout, Cart} from './pages/index.ts'
 import { App } from './App.tsx'
 
 const router = createBrowserRouter([
+  {
+    path: '*',
+    element: <NotFound/>,
+  },
   {
     path: '/',
     element: <App/>
@@ -22,7 +26,7 @@ const router = createBrowserRouter([
     element: <SearchRestaurant/>
   },
   {
-    path: '/admin',
+    path: '/admin/:restaurantID',
     element: <AdminHome/>,
   },
   {
@@ -36,6 +40,26 @@ const router = createBrowserRouter([
   {
     path: '/admin/products/new',
     element: <AdminRegisterProducts/>,
+  },
+  {
+    path: '/:restaurantID',
+    element: <UserHome/>,
+  },
+  {
+    path: '/:restaurantID/  :productName',
+    element: <ProductDetails/>,
+  },
+  {
+    path: '/:restaurantID/cart',
+    element: <Cart/>,
+  },
+  {
+    path: '/cart/checkout',
+    element: <Checkout/>,
+  },
+  {
+    path: '/:restaurantID/orders',
+    element: <UserOrders/>,
   },
 ])
 
