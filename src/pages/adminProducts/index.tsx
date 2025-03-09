@@ -1,5 +1,8 @@
 import { colors } from "@/_variables";
-import { TabBarAdmin, Logo, AdminCardPrimary, Button } from "@/components";
+import { TabBarAdmin, Logo, Button, AdminCardSecondary } from "@/components";
+import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } from "@/components/shared/svgComponents";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -18,17 +21,11 @@ const Header = styled.header`
   z-index: 99;
 `;
 const NovoProduto = styled.div`
-    width: 136px;
-    justify-self: right ;
-`
+  width: 136px;
+  justify-self: right;
+`;
 const Content = styled.div`
   margin-top: 24px;
-`;
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
 `;
 const List = styled.ul`
   display: flex;
@@ -41,15 +38,13 @@ const Title = styled.p`
   font-weight: 600;
   font-size: 18px;
   color: ${colors.masala};
-`;
-const VerTodos = styled.a`
-  width: 100%;
-  font-size: 14px;
-  color: ${colors.thunderbird70};
-  text-align: end;
+  margin-bottom: 16px;
 `;
 
 export const AdminProducts = () => {
+  const [pageActive, setPageActive] = useState('produtos')
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
       <Header>
@@ -64,31 +59,101 @@ export const AdminProducts = () => {
 
       <Content>
         <div>
-          <Container>
-            <Title>Produtos</Title>
-            <VerTodos>ver todos</VerTodos>
-          </Container>
+          <Title>Produtos</Title>
 
           <List>
             <li>
-              <AdminCardPrimary />
+              <AdminCardSecondary
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productName="Pizza de Mussarella"
+                productDescription="Lorem ipsum dolor sit amet consectetur. Dignissim etiam ut egestas vulputate vitae et. Scelerisque et donec purus feugiat. Eu dignissim
+  duis at facilisis donec est."
+                productPrice="R$ 134,80"
+              />
             </li>
             <li>
-              <AdminCardPrimary />
+              <AdminCardSecondary
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productName="Pizza de Mussarella"
+                productDescription="Lorem ipsum dolor sit amet consectetur. Dignissim etiam ut egestas vulputate vitae et. Scelerisque et donec purus feugiat. Eu dignissim
+  duis at facilisis donec est."
+                productPrice="R$ 134,80"
+              />
             </li>
             <li>
-              <AdminCardPrimary />
+              <AdminCardSecondary
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productName="Pizza de Mussarella"
+                productDescription="Lorem ipsum dolor sit amet consectetur. Dignissim etiam ut egestas vulputate vitae et. Scelerisque et donec purus feugiat. Eu dignissim
+  duis at facilisis donec est."
+                productPrice="R$ 134,80"
+              />
             </li>
             <li>
-              <AdminCardPrimary />
+              <AdminCardSecondary
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productName="Pizza de Mussarella"
+                productDescription="Lorem ipsum dolor sit amet consectetur. Dignissim etiam ut egestas vulputate vitae et. Scelerisque et donec purus feugiat. Eu dignissim
+  duis at facilisis donec est."
+                productPrice="R$ 134,80"
+              />
             </li>
             <li>
-              <AdminCardPrimary />
+              <AdminCardSecondary
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productName="Pizza de Mussarella"
+                productDescription="Lorem ipsum dolor sit amet consectetur. Dignissim etiam ut egestas vulputate vitae et. Scelerisque et donec purus feugiat. Eu dignissim
+  duis at facilisis donec est."
+                productPrice="R$ 134,80"
+              />
             </li>
           </List>
         </div>
       </Content>
-      <TabBarAdmin />
+      <TabBarAdmin
+        items={[
+          { 
+            active: pageActive === 'home' && true,
+            label: "Home", 
+            icon: <IconHome color={pageActive === 'home' ? '#D71A1A' : '#333333' }/>,
+            onclick:() => {
+              setPageActive('home')
+              // navigate(`/admin/${restaurant.id}`)
+              navigate(`/admin/resto`)
+            }
+          },
+          { 
+            active: pageActive === 'pedidos' && true,
+            label: "Pedidos", 
+            icon: <IconOrders color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('pedidos')
+              navigate("/admin/orders")
+            }
+          },
+          { 
+            active: pageActive === 'produtos' && true,
+            label: "Produtos", 
+            icon: <IconProducts color={pageActive === 'produtos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('produtos')
+              navigate("/admin/products")
+            }
+          },
+          { 
+            active: pageActive === 'notificacao' && true,
+            label: "Notificação",
+            icon: <IconNotifications color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>setPageActive('notificacao')
+          },
+          { 
+            active: pageActive === 'perfil' && true,
+            label: "Perfil", 
+            icon: <IconProfile color={pageActive === 'perfil' ? '#D71A1A' : '#333333' }/>, 
+            onclick:() =>setPageActive('perfil') 
+          },
+        ]}
+      />
     </Wrapper>
   );
 };

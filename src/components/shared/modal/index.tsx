@@ -1,15 +1,10 @@
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Button } from "../button";
 import { colors } from "@/_variables";
+import { IModal } from "@/interfaces/modal";
 
-interface IModal {
-  children?: ReactNode;
-  title: string;
-  description: string;
-  buttonText: string;
-  buttonTextSecondary?: string;
-}
+
 
 const Dialog = styled.dialog`
     width: max-content;

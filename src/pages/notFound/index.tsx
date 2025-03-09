@@ -1,4 +1,4 @@
-import { StatusMessage } from "@/components/shared/StatusMessage"
+import { StatusMessage } from "@/components/shared/statusMessage"
 import styled from 'styled-components'
 
 const Wrapper = styled.div`

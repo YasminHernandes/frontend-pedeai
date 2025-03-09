@@ -1,16 +1,7 @@
-import { ReactNode } from "react"
 import styled from "styled-components"
 import { colors } from "@/_variables"
 import IconCart from "@/assets/svg/icon-cart.svg"
-
-
-interface IButton {
-    children: ReactNode,
-    isFill?: boolean,
-    hasIcon?: boolean,
-    radius: string,
-    padding: string 
-}
+import { IButton } from "@/interfaces/button"
 
 const Wrapper = styled.button<{ $fill?: boolean, $radius: string, $padding: string }>`
     width: 100%;

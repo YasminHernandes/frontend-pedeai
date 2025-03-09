@@ -28,7 +28,7 @@ const RestaurantInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 0 8px;
+  padding: 0 16px;
 `;
 const TextLocation = styled.div`
   display: flex;
@@ -189,7 +189,7 @@ export const UserHome = () => {
             <UserCardTertiary/>
         </ListProducts>
 
-        <UserTabBar/>
+        <UserTabBar />
     </Wrapper>
   );
 };

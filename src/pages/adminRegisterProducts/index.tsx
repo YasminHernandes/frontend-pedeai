@@ -5,6 +5,9 @@ import IconSuccess from "@/assets/svg/icon-success.svg";
 import IconError from "@/assets/svg/icon-error.svg";
 import { Logo } from "@/components/shared";
 import IconBack from "@/assets/svg/icon-back.svg";
+import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } from "@/components/shared/svgComponents";
+import { useState } from "react";
+import { redirect, useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -102,6 +105,9 @@ const Textarea = styled.textarea`
 `;
 
 export const AdminRegisterProducts = () => {
+  const [pageActive, setPageActive] = useState('home')
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
       <Header>
@@ -109,6 +115,7 @@ export const AdminRegisterProducts = () => {
         <Back>
           <img src={IconBack} alt="" width="42px" height="42px" />
           <Title>Adicionar novo produto</Title>
+          
         </Back>
       </Header>
 
@@ -135,7 +142,51 @@ export const AdminRegisterProducts = () => {
         </Button>
       </Form>
 
-      <TabBarAdmin />
+      <TabBarAdmin
+        items={[
+          { 
+            active: pageActive === 'home' && true,
+            label: "Home", 
+            icon: <IconHome color={pageActive === 'home' ? '#D71A1A' : '#333333' }/>,
+            onclick:() => {
+              setPageActive('home')
+              // navigate(`/admin/${restaurant.id}`)
+              navigate(`/admin/resto`)
+            }
+          },
+          { 
+            active: pageActive === 'pedidos' && true,
+            label: "Pedidos", 
+            icon: <IconOrders color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('pedidos')
+              navigate("/admin/orders")
+            }
+          },
+          { 
+            active: pageActive === 'produtos' && true,
+            label: "Produtos", 
+            icon: <IconProducts color={pageActive === 'produtos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('produtos')
+              navigate("/admin/products")
+            }
+          },
+          { 
+            active: pageActive === 'notificacao' && true,
+            label: "Notificação",
+            icon: <IconNotifications color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>setPageActive('notificacao')
+          },
+          { 
+            active: pageActive === 'perfil' && true,
+            label: "Perfil", 
+            icon: <IconProfile color={pageActive === 'perfil' ? '#D71A1A' : '#333333' }/>, 
+            onclick:() =>setPageActive('perfil') 
+          },
+        ]}
+      />
+      
     </Wrapper>
   );
 };

@@ -1,5 +1,5 @@
 import { colors } from "@/_variables";
-import { Logo, UserCardPrimary, UserCardSecondary, UserTabBar } from "@/components"
+import { Logo, UserCardPrimary, UserTabBar } from "@/components"
 import styled from "styled-components";
 import IconNotification from '@/assets/svg/icon-notification.svg';
 

@@ -1,11 +1,6 @@
-import { ReactNode } from "react"
 import styled from "styled-components"
 import { colors } from "@/_variables"
-
-interface IBaseCard {
-    children: ReactNode,
-    hasBorder?: boolean
-}
+import { IBaseCard } from "@/interfaces/baseCard"
 
 const Wrapper = styled.div<{ $hasBorder?: boolean }>`
     border: ${(props) => props.$hasBorder ? `1px solid ${colors.alto}` : 'none'};

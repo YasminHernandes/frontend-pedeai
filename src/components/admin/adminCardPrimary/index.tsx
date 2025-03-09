@@ -3,6 +3,7 @@ import { BaseCard } from "@/components/shared";
 import { colors } from "@/_variables.ts";
 import IconEdit from "@/assets/svg/icon-edit.svg";
 import IconTrash from "@/assets/svg/icon-trash.svg";
+import { AdminCardPrimaryProps } from "@/interfaces/adminCardPrimary";
 
 const Header = styled.header`
   display: flex;
@@ -51,9 +52,9 @@ const ProductName = styled.span`
   color: ${colors.mineShaft};
 `;
 const DateStatusContainer = styled.div`
-    display: flex;
-    align-items: center;
-`
+  display: flex;
+  align-items: center;
+`;
 const ProductDate = styled.span`
   font-size: 11px;
   color: ${colors.stormDust};
@@ -70,34 +71,39 @@ const ProductPrice = styled.span`
   color: ${colors.thunderbird};
 `;
 
-export const AdminCardPrimary = () => {
+export const AdminCardPrimary = ({
+  phoneNumber,
+  productImage,
+  productQuantity,
+  productName,
+  orderDate,
+  orderStatus,
+  productPrice,
+}: AdminCardPrimaryProps) => {
   return (
     <BaseCard hasBorder>
       <div>
         <Header>
-          <Text>(11) 9 0000-0000</Text>
+          <Text>{phoneNumber}</Text>
           <Icons>
-            <img src={IconEdit} alt="" />
-            <img src={IconTrash} alt="" />
+            <img src={IconEdit} alt="Editar" />
+            <img src={IconTrash} alt="Excluir" />
           </Icons>
         </Header>
         <Container>
           <Figure>
-            <img
-              src="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <img src={productImage} alt={productName} />
           </Figure>
           <Content>
             <div>
-              <ProductQuantity> x2</ProductQuantity>
-              <ProductName> Pizza de Mussarella</ProductName>
+              <ProductQuantity> x{productQuantity}</ProductQuantity>
+              <ProductName> {productName}</ProductName>
             </div>
             <DateStatusContainer>
-              <ProductDate> 01 Março 2025 </ProductDate>
-              <ProductStatus> Em andamento </ProductStatus>
+              <ProductDate>{orderDate}</ProductDate>
+              <ProductStatus>{orderStatus}</ProductStatus>
             </DateStatusContainer>
-            <ProductPrice> R$ 134,80 </ProductPrice>
+            <ProductPrice>{productPrice}</ProductPrice>
           </Content>
         </Container>
       </div>

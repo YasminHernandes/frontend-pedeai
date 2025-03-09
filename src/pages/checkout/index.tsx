@@ -4,7 +4,7 @@ import IconBack from "@/assets/svg/icon-back.svg";
 import IconCash from "@/assets/svg/icon-cash.svg";
 import IconPix from "@/assets/svg/icon-pix.svg";
 import { Button } from "@/components";
-import { StatusMessage } from "@/components/shared/StatusMessage";
+import { StatusMessage } from "@/components/shared/statusMessage";
 
 const Wrapper = styled.div`
   width: 100%;

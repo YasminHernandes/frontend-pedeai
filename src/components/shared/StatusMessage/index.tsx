@@ -1,13 +1,7 @@
 import { colors } from "@/_variables";
 import styled from "styled-components";
 import { Button } from "../button";
-
-interface IStatusMessageProps {
-  title: string;
-  description: string;
-  section?: string;
-  textButton: string;
-}
+import { IStatusMessageProps } from "@/interfaces/statusMessage";
 
 const ContainerSuccess = styled.div`
   width: 100%;
@@ -29,6 +23,10 @@ const Description = styled.p`
   color: ${colors.boulder};
   text-align: center;
   margin-bottom: 24px;
+
+  strong {
+    margin-right: 4px;
+  }
 `;
 
 export const StatusMessage = ({title, description, section, textButton}: IStatusMessageProps) => {

@@ -1,7 +1,10 @@
 import { colors } from "@/_variables";
-import { TabBarAdmin, Logo, AdminCardPrimary} from "@/components";
+import { TabBarAdmin, Logo, AdminCardPrimary } from "@/components";
 import IconSearch from "@/assets/svg/icon-search.svg";
 import styled from "styled-components";
+import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } from "@/components/shared/svgComponents";
+import { useState } from "react";
+import { redirect, useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,13 +14,13 @@ const Wrapper = styled.div`
   padding: 0 8px;
 `;
 const Header = styled.header`
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: ${colors.white};
-    padding-bottom: 8px;
-`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: ${colors.white};
+  padding-bottom: 8px;
+`;
 const FieldContainer = styled.div`
   width: 100%;
   position: relative;
@@ -49,7 +52,7 @@ const Field = styled.input`
     outline: none;
     border: 1px solid ${colors.thunderbird};
   }
-`
+`;
 const Content = styled.div`
   margin-top: 24px;
 `;
@@ -60,11 +63,11 @@ const Container = styled.div`
   margin-bottom: 16px;
 `;
 const List = styled.ul`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-bottom: 90px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 90px;
+`;
 const Title = styled.p`
   flex-basis: 100%;
   font-weight: 600;
@@ -79,17 +82,24 @@ const VerTodos = styled.a`
 `;
 
 export const AdminOrders = () => {
+  const [pageActive, setPageActive] = useState('pedidos')
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
-        <Header>
-          <Logo />
+      <Header>
+        <Logo />
 
-          <FieldContainer>
-            <Field type="search" placeholder="Buscar por nome ou telefone do comprador" autoFocus />
-            <img src={IconSearch}/>
-          </FieldContainer>
-        </Header>
-      
+        <FieldContainer>
+          <Field
+            type="search"
+            placeholder="Buscar por nome ou telefone do comprador"
+            autoFocus
+          />
+          <img src={IconSearch} />
+        </FieldContainer>
+      </Header>
+
       <Content>
         <div>
           <Container>
@@ -98,15 +108,86 @@ export const AdminOrders = () => {
           </Container>
 
           <List>
-            <li><AdminCardPrimary/></li>
-            <li><AdminCardPrimary/></li>
-            <li><AdminCardPrimary/></li>
-            <li><AdminCardPrimary/></li>
-            <li><AdminCardPrimary/></li>
+            <li>
+              <AdminCardPrimary
+                phoneNumber="(11) 9 0000-0000"
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productQuantity={2}
+                productName="Pizza de Mussarella"
+                orderDate="01 Março 2025"
+                orderStatus="Em andamento"
+                productPrice="R$ 134,80"
+              />
+            </li>
+            <li>
+              <AdminCardPrimary
+                phoneNumber="(11) 9 0000-0000"
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productQuantity={2}
+                productName="Pizza de Mussarella"
+                orderDate="01 Março 2025"
+                orderStatus="Em andamento"
+                productPrice="R$ 134,80"
+              />
+            </li>
+            <li>
+              <AdminCardPrimary
+                phoneNumber="(11) 9 0000-0000"
+                productImage="https://plus.unsplash.com/premium_photo-1661762555601-47d088a26b50?q=80&w=1192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                productQuantity={2}
+                productName="Pizza de Mussarella"
+                orderDate="01 Março 2025"
+                orderStatus="Em andamento"
+                productPrice="R$ 134,80"
+              />
+            </li>
           </List>
         </div>
       </Content>
-      <TabBarAdmin />
+      <TabBarAdmin
+        items={[
+          { 
+            active: pageActive === 'home' && true,
+            label: "Home", 
+            icon: <IconHome color={pageActive === 'home' ? '#D71A1A' : '#333333' }/>,
+            onclick:() => {
+              setPageActive('home')
+              // navigate(`/admin/${restaurant.id}`)
+              navigate(`/admin/resto`)
+            }
+          },
+          { 
+            active: pageActive === 'pedidos' && true,
+            label: "Pedidos", 
+            icon: <IconOrders color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('pedidos')
+              navigate("/admin/orders")
+            }
+          },
+          { 
+            active: pageActive === 'produtos' && true,
+            label: "Produtos", 
+            icon: <IconProducts color={pageActive === 'produtos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{
+              setPageActive('produtos')
+              navigate("/admin/products")
+            }
+          },
+          { 
+            active: pageActive === 'notificacao' && true,
+            label: "Notificação",
+            icon: <IconNotifications color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>setPageActive('notificacao')
+          },
+          { 
+            active: pageActive === 'perfil' && true,
+            label: "Perfil", 
+            icon: <IconProfile color={pageActive === 'perfil' ? '#D71A1A' : '#333333' }/>, 
+            onclick:() =>setPageActive('perfil') 
+          },
+        ]}
+      />
     </Wrapper>
   );
 };

@@ -7,6 +7,8 @@ import {
 } from "@/components/shared/svgComponents";
 import { colors } from "../../../_variables";
 import IconOrder from "@/assets/svg/icon-order.svg";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,7 +26,7 @@ const List = styled.ul`
   display: flex;
   justify-content: space-between;
 `;
-const Item = styled.li`
+const Item = styled.li<{$active?: boolean}>`
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -32,7 +34,7 @@ const Item = styled.li`
   justify-content: center;
   gap: 16px;
   font-size: 12px;
-  color: ${colors.mineShaft};
+  color: ${(props) => props.$active ? colors.thunderbird : colors.mineShaft};
   cursor: pointer;
   transition: all 0.2s ease-in;
 
@@ -74,30 +76,33 @@ const Count = styled.span`
 `
 
 export const UserTabBar = () => {
+  const [pageActive, setPageActive] = useState('home')
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
       <List>
-        <Item>
-          <IconHome color="#333" />
+        <Item $active={pageActive === 'home' && true} onClick={() => { setPageActive('home'), navigate(`/resto`)}}>
+          <IconHome  color={pageActive === 'home' ? '#D71A1A' : '#333333' } />
           Home
         </Item>
-        <Item>
-          <IconOrders color="#333" />
+        <Item $active={pageActive === 'pedidos' && true} onClick={() => { setPageActive('pedidos'), navigate(`/resto/orders`)}}>
+          <IconOrders  color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' } />
           Pedidos
         </Item>
-        <ItemHighlighted>
+        <ItemHighlighted onClick={() => { setPageActive('pedir'), navigate(`/resto/cart`)}}>
           <Highligh>
             <img src={IconOrder} alt="" />
           </Highligh>
           <Count>1</Count>
           Pedir
         </ItemHighlighted>
-        <Item>
-          <IconNotifications color="#333" />
+        <Item $active={pageActive === 'notificacao' && true} onClick={() => { setPageActive('notificacao')}}>
+          <IconNotifications  color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' } />
           Notificações
         </Item>
-        <Item>
-          <IconProfile color="#333" />
+        <Item $active={pageActive === 'perfil' && true} onClick={() => { setPageActive('perfil')}}>
+          <IconProfile  color={pageActive === 'perfil' ? '#D71A1A' : '#333333' } />
           Perfil
         </Item>
       </List>

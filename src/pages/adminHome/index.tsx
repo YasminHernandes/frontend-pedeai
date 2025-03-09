@@ -1,6 +1,11 @@
 import { colors } from "@/_variables";
 import { TabBarAdmin } from "@/components";
 import { Button, Logo } from "@/components/shared";
+import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } from "@/components/shared/svgComponents";
+import { useApi } from "@/hooks/useApi";
+import { IRestaurant } from "@/interfaces/restaurant";
+import { useState } from "react";
+import { redirect, useNavigate } from "react-router";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -72,6 +77,11 @@ const Description = styled.p`
 const OrdersContainer = styled.div``;
 
 export const AdminHome = () => {
+  const { data: restaurant } = useApi<IRestaurant[]>('http://localhost:3000/public/restaurants')
+
+  const [pageActive, setPageActive] = useState('home')
+  const navigate = useNavigate()
+  
   return (
     <Wrapper>
       <LogoContainer>
@@ -79,9 +89,9 @@ export const AdminHome = () => {
       </LogoContainer>
 
       <AdminInfo>
-        <Username>oreidoparmigina</Username>
-        <Email>oreidoparmigiana</Email>
-        <Telephone>(11) 9 0000-0000</Telephone>
+        <Username>{restaurant[0]?.username}</Username>
+        <Email>{restaurant[0]?.email}</Email>
+        <Telephone>{restaurant[0]?.phone}</Telephone>
       </AdminInfo>
       <Content>
         <ProductContainer>
@@ -103,7 +113,40 @@ export const AdminHome = () => {
           <Description>Você não possui nenhum pedido</Description>
         </OrdersContainer>
       </Content>
-      <TabBarAdmin />
+      <TabBarAdmin
+        items={[
+          { 
+            active: pageActive === 'home' && true,
+            label: "Home", 
+            icon: <IconHome color={pageActive === 'home' ? '#D71A1A' : '#333333' }/>,
+            onclick:() => { setPageActive('home'), navigate(`/admin/resto`)}
+          },
+          { 
+            active: pageActive === 'pedidos' && true,
+            label: "Pedidos", 
+            icon: <IconOrders color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{ setPageActive('pedidos'), navigate("/admin/orders")}
+          },
+          { 
+            active: pageActive === 'produtos' && true,
+            label: "Produtos", 
+            icon: <IconProducts color={pageActive === 'produtos' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>{ setPageActive('produtos'), navigate("/admin/products")}
+          },
+          { 
+            active: pageActive === 'notificacao' && true,
+            label: "Notificação",
+            icon: <IconNotifications color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' }/>,
+            onclick:() =>setPageActive('notificacao')
+          },
+          { 
+            active: pageActive === 'perfil' && true,
+            label: "Perfil", 
+            icon: <IconProfile color={pageActive === 'perfil' ? '#D71A1A' : '#333333' }/>, 
+            onclick:() =>setPageActive('perfil') 
+          },
+        ]}
+      />
     </Wrapper>
   );
 };
