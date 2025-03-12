@@ -2,6 +2,9 @@ import { colors } from "@/_variables";
 import { Logo, UserCardPrimary, UserTabBar } from "@/components"
 import styled from "styled-components";
 import IconNotification from '@/assets/svg/icon-notification.svg';
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useCartContext } from "@/hooks/useCartContext";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,6 +39,18 @@ const OrdersList = styled.div`
 `
 
 export const UserOrders = () => {
+  const [pageActive, setPageActive] = useState("home");
+  const navigate = useNavigate();
+  const { Calculate } = useCartContext()
+
+  const handleNavigate = (page: string) => {
+    setPageActive(page);
+    navigate(`/resto/${page === "home" ? "" : page}`);
+  };
+
+  useEffect(() => {
+    Calculate.totalItems()
+  }, [])
 
     return (
         <Wrapper>
@@ -53,7 +68,7 @@ export const UserOrders = () => {
             </OrdersList>
           </div>
 
-          <UserTabBar/>
+          <UserTabBar pageActive={pageActive} onNavigate={handleNavigate} itemCount={Calculate.totalItems()} />
         </Wrapper>
     )
 }

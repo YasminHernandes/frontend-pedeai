@@ -5,7 +5,7 @@ import { IconHome, IconNotifications, IconOrders, IconProducts, IconProfile } fr
 import { useApi } from "@/hooks/useApi";
 import { IRestaurant } from "@/interfaces/restaurant";
 import { useState } from "react";
-import { redirect, useNavigate } from "react-router";
+import { redirect, useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -78,6 +78,7 @@ const OrdersContainer = styled.div``;
 
 export const AdminHome = () => {
   const { data: restaurant } = useApi<IRestaurant[]>('http://localhost:3000/public/restaurants')
+  const params  = useParams()
 
   const [pageActive, setPageActive] = useState('home')
   const navigate = useNavigate()

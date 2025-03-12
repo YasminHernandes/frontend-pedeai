@@ -3,6 +3,9 @@ import styled from "styled-components";
 import IconBack from "@/assets/svg/icon-back.svg";
 import { UserCardSecondary, UserTabBar } from "@/components";
 import { Button } from '../../components/shared/button/index';
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useCartContext } from "@/hooks/useCartContext";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -113,6 +116,20 @@ const TotalValue = styled(Data)`
 
 
 export const Cart = () => {
+    const [pageActive, setPageActive] = useState("home");
+    const navigate = useNavigate();
+  
+    const { Calculate } = useCartContext()
+
+    const handleNavigate = (page: string) => {
+      setPageActive(page);
+      navigate(`/resto/${page === "home" ? "" : page}`);
+    };
+  
+    useEffect(() => {
+        Calculate.totalItems()
+      }, [])
+
   return (
     <Wrapper>
       <Back>
@@ -130,10 +147,6 @@ export const Cart = () => {
             <Item>
                 <Text>Telefone</Text>
                 <Data>(11) 9 0000-0000</Data>
-            </Item>
-            <Item>
-                <Text>Endereço de entrega</Text>
-                <Data>Av. Principal, Vila Velha - Vitória</Data>
             </Item>
          </OrderInfo>
       </OrderContainer>
@@ -155,12 +168,7 @@ export const Cart = () => {
                 <SubText>Taxa de Serviço</SubText>
                 <Data>R$ 13,48</Data>
             </SubItem>
-            
-            <SubItem>
-                <SubText>Taxa de Entrega</SubText>
-                <Data>R$ 5,00</Data>
-            </SubItem>
-            
+           
             <Total>
                 <TotalText>Total</TotalText>
                 <TotalValue>R$ 153,28</TotalValue>
@@ -168,7 +176,7 @@ export const Cart = () => {
         </SummaryInfo>
         <Button isFill radius="50px" padding="12px">Escolher forma de pagamento</Button>
       </SummaryContainer>
-      <UserTabBar/>
+      <UserTabBar pageActive={pageActive} onNavigate={handleNavigate} itemCount={Calculate.totalItems()} />
     </Wrapper>
   );
 };

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import IconBack from "@/assets/svg/icon-back.svg";
 import { colors } from "@/_variables";
 import { Button, Quantity } from "@/components";
+import { useCartContext } from "@/hooks/useCartContext";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -99,6 +100,8 @@ const PriceValue = styled.p`
 `
 
 export const ProductDetails = () => {
+  const { count, Count, removeItem} = useCartContext()
+
   return (
     <Wrapper>
       <Back>
@@ -113,7 +116,9 @@ export const ProductDetails = () => {
         </div>
         <div>
           <Text>Quantidade</Text>
-          <Quantity iconColor={colors.boulder}>2</Quantity>
+          <Quantity iconColor={colors.boulder} onDecrease={Count.decreaseCount(0)} onIncrease={Count.increaseCount(0)}>
+            { count < 1 ? removeItem(0) : count }
+          </Quantity>
         </div>
       </ProductInfo>
 

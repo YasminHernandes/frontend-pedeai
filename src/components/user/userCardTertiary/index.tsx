@@ -3,6 +3,7 @@ import { colors } from "@/_variables.ts";
 import { BaseCard, Quantity } from "@/components";
 import IconMore from "@/assets/svg/icon-add-more.svg";
 import { useState } from "react";
+import { useCartContext } from "@/hooks/useCartContext";
 
 const Container = styled.div`
   display: flex;
@@ -59,6 +60,8 @@ const ProductPrice = styled.span`
 
 export const UserCardTertiary = () => {
   const [addToCart, setAddToCart] = useState<boolean>(false);
+  const { count, Count} = useCartContext()
+
   return (
     <BaseCard>
       <Container>
@@ -77,7 +80,7 @@ export const UserCardTertiary = () => {
           </Description>
           <PriceQuantity>
             <ProductPrice> R$ 134,80 </ProductPrice>
-            {addToCart ? <Quantity primary iconColor={colors.thunderbird}> 2 </Quantity>
+            {addToCart ? <Quantity iconColor={colors.boulder} onDecrease={Count.decreaseCount(0)} onIncrease={Count.increaseCount(0)}>{count}</Quantity>
             : <img src={IconMore} alt="Icon Add More" onClick={() => setAddToCart(true)}/>
             }
           </PriceQuantity>

@@ -200,11 +200,6 @@ export const Checkout = () => {
                 <Data>R$ 13,48</Data>
             </SubItem>
             
-            <SubItem>
-                <SubText>Taxa de Entrega</SubText>
-                <Data>R$ 5,00</Data>
-            </SubItem>
-            
             <Total>
                 <TotalText>Total</TotalText>
                 <TotalValue>R$ 153,28</TotalValue>

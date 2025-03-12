@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "@/_variables.ts";
 import IconTrash from "@/assets/svg/icon-trash.svg";
 import { BaseCard, Quantity } from '@/components';
+import { useCartContext } from "@/hooks/useCartContext";
 
 const Container = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ const ProductPrice = styled.span`
 `;
 
 export const UserCardSecondary = () => {
+  const { count, Count} = useCartContext()
   return (
     <BaseCard>
       <Container>
@@ -83,7 +85,7 @@ export const UserCardSecondary = () => {
           </Description>
           <PriceQuantity>
             <ProductPrice> R$ 134,80 </ProductPrice>
-            <Quantity iconColor={colors.boulder}> 2 </Quantity>
+            <Quantity iconColor={colors.boulder} onDecrease={Count.decreaseCount(0)} onIncrease={Count.increaseCount(0)}>{count}</Quantity>
           </PriceQuantity>
         </Content>
       </Container>

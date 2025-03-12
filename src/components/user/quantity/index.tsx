@@ -1,13 +1,8 @@
-import { ReactNode } from "react";
 import styled from "styled-components";
 import { IconMinus, IconPlus } from "@/components/shared/svgComponents";
 import { colors } from "@/_variables";
-
-interface IQuantity {
-  children: ReactNode;
-  primary?: true;
-  iconColor: string;
-}
+import { useCartContext } from "@/hooks/useCartContext";
+import { IQuantity } from "@/interfaces/quantity";
 
 const Wrapper = styled.div<{ $primary?: boolean }>`
   min-width: ${(props) => (props.$primary ? "95px" : "87px")};
@@ -35,14 +30,15 @@ const Value = styled.span`
   color: ${colors.thunderbird};
 `;
 
-export const Quantity = ({ children, primary, iconColor }: IQuantity) => {
+export const Quantity = ({ children, primary, iconColor, onDecrease, onIncrease }: IQuantity) => {
+
   return (
     <Wrapper $primary={primary}>
-      <Icon $primary={primary}>
+      <Icon $primary={primary} onClick={() => onDecrease}>
         <IconMinus color={iconColor} />
       </Icon>
       <Value>{children}</Value>
-      <Icon $primary={primary}>
+      <Icon $primary={primary} onClick={() => onIncrease}>
         <IconPlus color={iconColor} />
       </Icon>
     </Wrapper>

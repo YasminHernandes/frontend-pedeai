@@ -6,6 +6,12 @@ import IconStart from "@/assets/svg/icon-star.svg";
 import { colors } from "@/_variables";
 import styled from "styled-components";
 import { IconCircle } from "@/components/shared/svgComponents/IconCircle";
+import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { useCartContext } from "@/hooks/useCartContext";
+import { useApi } from "@/hooks/useApi";
+import { IRestaurant } from "@/interfaces/restaurant";
+import { IProduct } from "@/interfaces/products";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -75,7 +81,7 @@ const Text = styled.div`
   font-weight: 500;
   font-size: 12px;
   color: ${colors.mineShaft};
-  margin-top: 8px;
+  margin: 8px 0 16px;
 
   span {
     color: ${colors.thunderbird70};
@@ -119,23 +125,52 @@ const SearchInput = styled.input`
   }
 `;
 const ListProducts = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: ${colors.alabaster};
-    border-radius: 16px 16px 0 0;
-    padding: 24px 16px 100px; 
-    margin: 0 auto;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: ${colors.alabaster};
+  border-radius: 16px 16px 0 0;
+  padding: 24px 16px 100px;
+  margin: 0 auto;
+`;
 
 export const UserHome = () => {
+  const { Calculate } = useCartContext()
+
+  const [pageActive, setPageActive] = useState("home");
+  const navigate = useNavigate();
+  const params = useParams()
+
+  const { data: restaurante } = useApi<IRestaurant>(`http://localhost:3000/public/restaurants/${params.restaurantID}`)
+  const { data: products } = useApi<IProduct>(`http://localhost:3000/restaurant/products/${params.restaurantID}`, {
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN0YXVyYW50SWQiOjMsImlhdCI6MTc0MTU2Nzk2MSwiZXhwIjoxNzQxNTc1MTYxfQ.XfwBn54mQxjl9NRJEKs2kpbSv-nj6ABsqhvjijdJNp8'
+    }
+  })
+
+  const username = restaurante?.username?.replace('_', ' ')
+  
+
+  console.log("res", restaurante)
+  console.log("par", params)
+  console.log("prod", products)
+
+  const handleNavigate = (page: string) => {
+    setPageActive(page);
+    navigate(`${params.restaurantID}/${page === "home" ? "" : page}`);
+  };
+
+  useEffect(() => {
+    Calculate.totalItems()
+  }, [])
+
   return (
     <Wrapper>
       <Header>
         <Logo />
         <img src={IconNotification} alt="icon notification" />
       </Header>
-      
+
       <RestaurantInfo>
         <div>
           <TextLocation>
@@ -145,7 +180,7 @@ export const UserHome = () => {
           <Location>Av Principal, Vila Velha - ES</Location>
         </div>
 
-        <RestaurantLogo>The Restô</RestaurantLogo>
+        <RestaurantLogo>{ username }</RestaurantLogo>
 
         <div>
           <OpenRating>
@@ -160,10 +195,6 @@ export const UserHome = () => {
           </OpenRating>
 
           <Text>
-            Frete Fixo:
-            <span>R$ 6,00</span>
-          </Text>
-          <Text>
             Tempo de entrega:
             <span>40~60 minutos</span>
           </Text>
@@ -175,21 +206,21 @@ export const UserHome = () => {
         </div>
       </RestaurantInfo>
 
-        <ListProducts>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-            <UserCardTertiary/>
-        </ListProducts>
+      <ListProducts>
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+        <UserCardTertiary />
+      </ListProducts>
 
-        <UserTabBar />
+      <UserTabBar pageActive={pageActive} onNavigate={handleNavigate} itemCount={Calculate.totalItems()} />
     </Wrapper>
   );
 };

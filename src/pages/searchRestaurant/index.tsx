@@ -3,6 +3,10 @@ import { Button } from "@/components";
 import { colors } from "@/_variables";
 import IconSearch from "@/assets/svg/icon-search.svg";
 import { Logo } from "@/components/shared";
+import { useEffect, useState } from "react";
+import { IRestaurant } from "@/interfaces/restaurant";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,7 +35,7 @@ const Description = styled.p`
 const FieldContainer = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   img {
     position: absolute;
@@ -60,20 +64,48 @@ const Field = styled.input`
     border: 1px solid ${colors.thunderbird};
   }
 `;
-
+const Message = styled.p`
+  width: 100%;
+  font-weight: 500;
+  font-size: 10px;
+  color: ${colors.thunderbird};
+  margin-bottom: 16px;
+`;
 export const SearchRestaurant = () => {
+  const [hasRestaurant, setHasRestaurant] = useState<boolean | null>(null)
+  const [valueID, setValueID] = useState(0)
+  const [data, setData] = useState<IRestaurant | null>()
+  const navigate = useNavigate()
+ 
+  useEffect(()=> {
+      axios.get(`http://localhost:3000/public/restaurants/${valueID}`)
+      .then(response => response.data)
+      .then(data => {
+        setHasRestaurant(true)
+        setData(data)
+      })
+      .catch(error => console.log(error))
+
+  },[valueID])
+
+  const search = () => {
+      data?.id ? navigate(`/${data?.id}`) : setHasRestaurant(false)
+  }
+
   return (
     <Wrapper>
       <Logo/>
       <Title>Buscar restaurante</Title>
-      <Description>Digite o nome de um restaurante</Description>
+      <Description>Digite o ID de um restaurante</Description>
 
       <FieldContainer>
-        <Field type="search" placeholder="Buscar" autoFocus />
+        <Field type="text" placeholder="Buscar" autoFocus onChange={(e) => setValueID(Number(e.target.value))} />
         <img src={IconSearch}/>
       </FieldContainer>
 
-      <Button isFill radius="50px" padding="12px">
+      { hasRestaurant == false && <Message> Restaurante não encontrado! </Message>}
+     
+     <Button isFill radius="50px" padding="12px" onClick={search} >
         Buscar
       </Button>
     </Wrapper>

@@ -21,10 +21,10 @@ const Wrapper = styled.button<{ $fill?: boolean, $radius: string, $padding: stri
     }
 `
 
-export const Button = ({ children, isFill, hasIcon, radius, padding }: IButton) => {
+export const Button = ({ children, isFill, hasIcon, radius, padding, onClick }: IButton) => {
 
     return (
-        <Wrapper $fill={isFill} $radius={radius} $padding={padding}>
+        <Wrapper $fill={isFill} $radius={radius} $padding={padding} onClick={onClick}>
             { hasIcon && <img src={IconCart} alt="Icon" /> }
             { children }
         </Wrapper>

@@ -7,8 +7,7 @@ import {
 } from "@/components/shared/svgComponents";
 import { colors } from "../../../_variables";
 import IconOrder from "@/assets/svg/icon-order.svg";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { IUserTabBarProps } from "@/interfaces/userTabBar";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,12 +20,14 @@ const Wrapper = styled.div`
   margin: 0 auto;
   background: ${colors.white};
 `;
+
 const List = styled.ul`
   height: 50px;
   display: flex;
   justify-content: space-between;
 `;
-const Item = styled.li<{$active?: boolean}>`
+
+const Item = styled.li<{ $active?: boolean }>`
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -34,7 +35,7 @@ const Item = styled.li<{$active?: boolean}>`
   justify-content: center;
   gap: 16px;
   font-size: 12px;
-  color: ${(props) => props.$active ? colors.thunderbird : colors.mineShaft};
+  color: ${(props) => (props.$active ? colors.thunderbird : colors.mineShaft)};
   cursor: pointer;
   transition: all 0.2s ease-in;
 
@@ -60,49 +61,46 @@ const Highligh = styled.div`
 `;
 
 const Count = styled.span`
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: -2px;
-    right: 0;
-    background: ${colors.yellowSea};
-    border-radius: 50%;
-    font-size: 9px;
-    font-weight: 600;
-    color: ${colors.white};
-`
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -2px;
+  right: 0;
+  background: ${colors.yellowSea};
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 600;
+  color: ${colors.white};
+`;
 
-export const UserTabBar = () => {
-  const [pageActive, setPageActive] = useState('home')
-  const navigate = useNavigate()
-
+export const UserTabBar = ({ pageActive, onNavigate, itemCount = 0 }: IUserTabBarProps) => {
   return (
     <Wrapper>
       <List>
-        <Item $active={pageActive === 'home' && true} onClick={() => { setPageActive('home'), navigate(`/resto`)}}>
-          <IconHome  color={pageActive === 'home' ? '#D71A1A' : '#333333' } />
+        <Item $active={pageActive === "home"} onClick={() => onNavigate("home")}>
+          <IconHome color={pageActive === "home" ? "#D71A1A" : "#333333"} />
           Home
         </Item>
-        <Item $active={pageActive === 'pedidos' && true} onClick={() => { setPageActive('pedidos'), navigate(`/resto/orders`)}}>
-          <IconOrders  color={pageActive === 'pedidos' ? '#D71A1A' : '#333333' } />
+        <Item $active={pageActive === "orders"} onClick={() => onNavigate("orders")}>
+          <IconOrders color={pageActive === "orders" ? "#D71A1A" : "#333333"} />
           Pedidos
         </Item>
-        <ItemHighlighted onClick={() => { setPageActive('pedir'), navigate(`/resto/cart`)}}>
+        <ItemHighlighted onClick={() => onNavigate("cart")}>
           <Highligh>
             <img src={IconOrder} alt="" />
           </Highligh>
-          <Count>1</Count>
+          {itemCount > 0 && <Count>{itemCount}</Count>}
           Pedir
         </ItemHighlighted>
-        <Item $active={pageActive === 'notificacao' && true} onClick={() => { setPageActive('notificacao')}}>
-          <IconNotifications  color={pageActive === 'notificacao' ? '#D71A1A' : '#333333' } />
+        <Item $active={pageActive === "notificacao"}>
+          <IconNotifications color={pageActive === "notificacao" ? "#D71A1A" : "#333333"} />
           Notificações
         </Item>
-        <Item $active={pageActive === 'perfil' && true} onClick={() => { setPageActive('perfil')}}>
-          <IconProfile  color={pageActive === 'perfil' ? '#D71A1A' : '#333333' } />
+        <Item $active={pageActive === "perfil"}>
+          <IconProfile color={pageActive === "perfil" ? "#D71A1A" : "#333333"} />
           Perfil
         </Item>
       </List>

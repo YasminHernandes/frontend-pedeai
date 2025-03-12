@@ -110,7 +110,7 @@ export const LoginRestaurant = () => {
         </ForgetPassword>
 
         <Button isFill radius="50px" padding="12px">
-          Buscar
+          Entrar
         </Button>
 
          <NotClient>
